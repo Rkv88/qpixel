@@ -5,8 +5,8 @@ class TagsController < ApplicationController
                else
                  nil
                end
-    @tags = if params[:q].present?
-              (@tag_set&.tags || Tag).where('name LIKE ?', "#{params[:q]}%")
+    @tags = if params[:term].present?
+              (@tag_set&.tags || Tag).where('name LIKE ?', "#{params[:term]}%")
             else
               @tag_set&.tags || Tag.all
             end.order(:name).paginate(page: params[:page], per_page: 50)
