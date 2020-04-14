@@ -1,5 +1,4 @@
 require 'ostruct'
-require 'thwait'
 
 class DumpImport
   def initialize(options)
@@ -30,7 +29,7 @@ class DumpImport
         $logger.debug "         #{basename}: #{rows.size}"
       end
     end
-    ThreadsWait.all_waits(*threads)
+    threads.each(&:join)
 
     $logger.info 'Load done'
   end
